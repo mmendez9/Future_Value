@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://Z://Future_Value/Future_Value.iml" filepath="Z://Future_Value/Future_Value.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Future_Value.iml" filepath="$PROJECT_DIR$/Future_Value.iml" />
     </modules>
   </component>
 </project>
