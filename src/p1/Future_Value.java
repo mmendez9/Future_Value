@@ -6,14 +6,16 @@ package p1;
 
 
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 public class Future_Value extends Application {
@@ -25,7 +27,6 @@ public class Future_Value extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         GridPane pane = new GridPane();
-        pane.setPadding(new Insets(10, 10, 10 ,10));
         pane.setHgap(5);
         pane.setVgap(5);
         pane.addRow(0, new Label("Investment Amount: "), txAmount);
@@ -37,10 +38,29 @@ public class Future_Value extends Application {
         pane.add(btCalculate, 1, 4);
         GridPane.setHalignment(btCalculate, HPos.RIGHT);
 
+        pane.setAlignment(Pos.CENTER);
+        txAmount.setAlignment(Pos.BOTTOM_RIGHT);
+        txYears.setAlignment(Pos.BOTTOM_RIGHT);
+        txAnnualRate.setAlignment(Pos.BOTTOM_RIGHT);
+
+        txFutureValue.setEditable(false);
+        btCalculate.setOnAction(new calculateFutureValue());
+
         Scene scene = new Scene(pane, 275, 150);
-        primaryStage.setTitle("Future Value");
+        primaryStage.setTitle("Investment-Value");
         primaryStage.setScene(scene);
-        primaryStage.setResizable(false);
         primaryStage.show();
+    }
+
+    class calculateFutureValue implements EventHandler<ActionEvent> {
+        @Override
+        public void handle(ActionEvent event) {
+            double amount = Double.parseDouble(txAmount.getText());
+            int year = Integer.parseInt(txYears.getText());
+            double rate = Double.parseDouble(txAnnualRate.getText());
+
+            double value = (amount * (Math.pow((1 + rate), (year * 12))));
+            txFutureValue.setText(String.format("$%2f", value));
+        }
     }
 }
