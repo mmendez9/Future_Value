@@ -18,6 +18,7 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 public class Future_Value extends Application {
+
     TextField txAmount = new TextField();
     TextField txYears = new TextField();
     TextField txAnnualRate = new TextField();
