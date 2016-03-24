@@ -44,6 +44,7 @@ public class Future_Value extends Application {
         txAnnualRate.setAlignment(Pos.BOTTOM_RIGHT);
 
         txFutureValue.setEditable(false);
+        txFutureValue.setAlignment(Pos.BASELINE_RIGHT);
         btCalculate.setOnAction(new calculateFutureValue());
 
         Scene scene = new Scene(pane, 275, 150);
@@ -55,12 +56,14 @@ public class Future_Value extends Application {
     class calculateFutureValue implements EventHandler<ActionEvent> {
         @Override
         public void handle(ActionEvent event) {
-            double amount = Double.parseDouble(txAmount.getText());
+            double annualRate = Double.parseDouble(txAnnualRate.getText());
             int year = Integer.parseInt(txYears.getText());
-            double rate = Double.parseDouble(txAnnualRate.getText());
+            double amount = Double.parseDouble(txAmount.getText());
 
-            double value = (amount * (Math.pow((1 + rate), (year * 12))));
-            txFutureValue.setText(String.format("$%2f", value));
+            double monthlyRate = annualRate / 1200;
+            double value = (amount * (Math.pow((1 + monthlyRate), (year * 12))));
+
+            txFutureValue.setText(String.format("$%.2f", value));
         }
     }
 }
